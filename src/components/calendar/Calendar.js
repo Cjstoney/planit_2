@@ -26,6 +26,10 @@ class CalendarComp extends React.Component {
   componentDidUpdate(){
     getDate(this.state.value)
   }
+
+  componentDidMount(){
+    getDate(this.state.value)
+  }
   
   render() {
   
