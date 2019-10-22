@@ -12,7 +12,7 @@ const getDate = (input)=>{
      year: dateArray[3]
    };
    console.log(payload);
-   return payload;
+   return payload;// replace this with an ajax or axios call when the routes are complete
   }
 
 class CalendarComp extends React.Component {
@@ -23,7 +23,7 @@ class CalendarComp extends React.Component {
   
     onChange = value => this.setState({ value });
 
-  componentDidMount(){
+  componentDidUpdate(){
     getDate(this.state.value)
   }
   
