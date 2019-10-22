@@ -15,13 +15,22 @@ class CalendarComp extends React.Component {
     
    
     render() {
-        const {value} = this.state;
+
+        const {value} = this.state; //assiging the state to a variable to have access to it in later functions
+
+        // parses through the date info and prepares it to be used as a paylod to fetch events for that day
         const getDate = () =>{
             let dateString = value.toString();
             let dateArray = dateString.split(" ")
-            console.log(dateArray)
+            let payload ={
+                dayOfWeek : dateArray[0],
+                month : dateArray[1],
+                dayOfMonth : dateArray[2],
+                year: dateArray[3]
+            }
+            console.log(payload)
+            return payload 
         }
-        // console.log(value)
         return (
             <div onClick={getDate}>
                 
