@@ -9,7 +9,7 @@ import {Link} from 'react-router-dom';
 const newUserPayload = () =>{
     let newName = document.getElementsByName('name')[0].value;
     let newemail = document.getElementsByName('email')[0].value;
-    let newpassword = document.getElementsByName('password')[0].value; //need to hash with bcrypt?
+    let newpassword = document.getElementsByName('password')[0].value; //need to hash on backend with bcrypt?
     let userPayload = {
         Name:newName,
         email:newemail,
