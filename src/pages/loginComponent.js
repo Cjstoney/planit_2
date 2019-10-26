@@ -20,7 +20,7 @@ const loginPayload=()=>{
         }
         console.log('loginUserPayload to be sent to the backend ', loginUserPayload)
         
-        axios.post('http://localhost:3001/api/newuser', {
+        /*axios.post('http://localhost:3001/api/newuser', {
                loginUserPayload
             })
                   .then(function(response){
@@ -28,7 +28,7 @@ const loginPayload=()=>{
                 })
                 .catch(function(error){
                   console.log(error)
-                })
+                })*/
 
     }else if(emailValidation(loginEmail) && loginPassword.length<7){
         alert("password is not long enough")
