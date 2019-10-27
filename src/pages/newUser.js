@@ -8,25 +8,47 @@ const emailValidation=(email)=>{
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
 
+// name validation
+const nameValidation = (name)=>{
+    return /^[a-zA-Z]+(?:-[a-zA-Z]+)* [a-zA-Z]+(?:-[a-zA-Z]+)*/.test(name)
+}
+
+
+// clearing the input function
+const clearInput = (target) =>{
+    
+}
+
 // function to capture all inputs and package it up to send to db
 const newUserPayload = () =>{
     let userPayload = {};
     let newName = document.getElementsByName('name')[0].value;
     let newEmail = document.getElementsByName('email')[0].value;
     let newPassword = document.getElementsByName('password')[0].value; //need to hash on backend with bcrypt?
-    if (newName.longth !== 0 && emailValidation(newEmail)&& newPassword.length>=7){
+    if (nameValidation(newName) && emailValidation(newEmail)&& newPassword.length>=7){
         userPayload = {
             Name:newName,
             email:newEmail,
             password:newPassword
         }
+        
+        /*axios.post('http://localhost:3001/api/newuser', {
+               loginUserPayload
+            })
+                  .then(function(response){
+                  console.log(response)
+                })
+                .catch(function(error){
+                  console.log(error)
+                })*/
+
         // clear all input fields
         console.log(userPayload)
-    }else if (newName.password === 0 && emailValidation(newEmail)&& newPassword.length>=7){
-        alert('You need to enter a name')
-    }else if (newName.longth !== 0 && emailValidation(newEmail)=== false&& newPassword.length>=7){
+    }else if (nameValidation(newName) === false && emailValidation(newEmail)&& newPassword.length>=7){
+        alert('You need to enter a first and last name')
+    }else if (nameValidation(newName) && emailValidation(newEmail)=== false&& newPassword.length>=7){
         alert('Not a valid email')
-    }else if(newName.longth !== 0 && emailValidation(newEmail)&& newPassword.length< 7){
+    }else if(nameValidation(newName) && emailValidation(newEmail)&& newPassword.length< 7){
         alert('password is not long enough')
     }else{
         alert('Something went wrong, please try again.')
