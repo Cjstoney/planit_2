@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import axios from 'axios'
+//import axios from 'axios'
 
 // simple test for email format. Stricter validation to be done on the backend.
 const emailValidation=(email)=>{

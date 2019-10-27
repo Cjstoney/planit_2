@@ -3,19 +3,34 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {Link} from 'react-router-dom';
 
+// more detailed validation on the backend
+const emailValidation=(email)=>{
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+}
 
 // function to capture all inputs and package it up to send to db
-
 const newUserPayload = () =>{
+    let userPayload = {};
     let newName = document.getElementsByName('name')[0].value;
-    let newemail = document.getElementsByName('email')[0].value;
-    let newpassword = document.getElementsByName('password')[0].value; //need to hash on backend with bcrypt?
-    let userPayload = {
-        Name:newName,
-        email:newemail,
-        password:newpassword
+    let newEmail = document.getElementsByName('email')[0].value;
+    let newPassword = document.getElementsByName('password')[0].value; //need to hash on backend with bcrypt?
+    if (newName.longth !== 0 && emailValidation(newEmail)&& newPassword.length>=7){
+        userPayload = {
+            Name:newName,
+            email:newEmail,
+            password:newPassword
+        }
+        // clear all input fields
+        console.log(userPayload)
+    }else if (newName.password === 0 && emailValidation(newEmail)&& newPassword.length>=7){
+        alert('You need to enter a name')
+    }else if (newName.longth !== 0 && emailValidation(newEmail)=== false&& newPassword.length>=7){
+        alert('Not a valid email')
+    }else if(newName.longth !== 0 && emailValidation(newEmail)&& newPassword.length< 7){
+        alert('password is not long enough')
+    }else{
+        alert('Something went wrong, please try again.')
     }
-    console.log(userPayload)
 }
 
 
