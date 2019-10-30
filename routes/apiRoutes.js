@@ -1,3 +1,5 @@
+var helpers = require('./helperFunction')
+
 module.exports = function(app){
     // attempt to deal with the cors problem
     app.use(function(req, res, next){
@@ -20,6 +22,12 @@ module.exports = function(app){
             password : req.body.userPayload.password
         }
         console.log(newUser, "newUser")
+        let errors = {}
+        if(helpers.emptyString(newUser.email)){
+            errors.email = 'Must not be empty'
+        }else if (helpers.emailFormat(newUser.email)){
+            errors.email = 'Must be a valid email'
+        }
 
     })
 
