@@ -3,11 +3,16 @@ const path = require('path')
 const routes = require('./routes/apiRoutes.js')
 var app = express();
 
+const PORT = process.env.PORT || 3001
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 routes(app);
 
-let server = app.listen(3001, function (){
-    console.log('app running on port. ', server.address().port)
-})
+app.listen(PORT, function() {
+    console.log(
+      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
+      PORT,
+      PORT
+    );
+  });

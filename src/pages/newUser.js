@@ -2,6 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 // more detailed validation on the backend
 const emailValidation=(email)=>{
@@ -32,15 +33,15 @@ const newUserPayload = () =>{
             password:newPassword
         }
         
-        /*axios.post('http://localhost:3001/api/newuser', {
-               loginUserPayload
+        axios.post('http://localhost:3001/api/signup', {
+               userPayload
             })
                   .then(function(response){
                   console.log(response)
                 })
                 .catch(function(error){
                   console.log(error)
-                })*/
+                })
 
         // clear all input fields
         console.log(userPayload)
