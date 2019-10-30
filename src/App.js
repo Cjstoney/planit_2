@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import Signup from './pages/newUser'
 import LoginComponent from './pages/loginComponent';
-import CalendarComp from './components/calendar/Calendar'
+import CalendarComp from './pages/Calendar'
 
 
 
