@@ -1,5 +1,7 @@
 import React from "react";
 import Calendar from "react-calendar";
+import ToDo from '../components/todo'
+
 
 const getDate = input => {
   let dateString = input.toString();
@@ -35,8 +37,11 @@ class CalendarComp extends React.Component {
 
   render() {
     return (
+      <div>
       <div onClick={getDate}>
         <Calendar onChange={this.onChange} value={this.state.date} />
+      </div>
+      <ToDo />
       </div>
     );
   }

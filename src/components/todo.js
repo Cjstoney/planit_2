@@ -12,7 +12,9 @@ const ToDo = () => {
       <ul className="todo-list">
         <li></li>
       </ul>
-      <a></a>
+      <button className='add-button-container'>
+          <img src='./icons/iconfinder_plus_alt_118618.png' alt='add-button'/>
+      </button>
     </div>
   );
 };
