@@ -2,6 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 // more detailed validation on the backend
 const emailValidation=(email)=>{
@@ -24,32 +25,36 @@ const newUserPayload = () =>{
     let userPayload = {};
     let newName = document.getElementsByName('name')[0].value;
     let newEmail = document.getElementsByName('email')[0].value;
-    let newPassword = document.getElementsByName('password')[0].value; //need to hash on backend with bcrypt?
-    if (nameValidation(newName) && emailValidation(newEmail)&& newPassword.length>=7){
+    let newPassword = document.getElementsByName('password')[0].value; 
+    let newPasswordConfirm = document.getElementsByName('confirm-password')[0].value; 
+    if (nameValidation(newName) && emailValidation(newEmail)&& newPassword.length>=7 && newPassword=== newPasswordConfirm){
         userPayload = {
             Name:newName,
             email:newEmail,
-            password:newPassword
+            password:newPassword,
+            confirmation:newPasswordConfirm
         }
         
-        /*axios.post('http://localhost:3001/api/newuser', {
-               loginUserPayload
+        axios.post('http://localhost:3001/api/signup', {
+               userPayload
             })
                   .then(function(response){
                   console.log(response)
                 })
                 .catch(function(error){
                   console.log(error)
-                })*/
+                })
 
         // clear all input fields
         console.log(userPayload)
-    }else if (nameValidation(newName) === false && emailValidation(newEmail)&& newPassword.length>=7){
+    }else if (nameValidation(newName) === false && emailValidation(newEmail)&& newPassword.length>=7&& newPassword=== newPasswordConfirm){
         alert('You need to enter a first and last name')
-    }else if (nameValidation(newName) && emailValidation(newEmail)=== false&& newPassword.length>=7){
+    }else if (nameValidation(newName) && emailValidation(newEmail)=== false&& newPassword.length>=7&& newPassword=== newPasswordConfirm){
         alert('Not a valid email')
-    }else if(nameValidation(newName) && emailValidation(newEmail)&& newPassword.length< 7){
+    }else if(nameValidation(newName) && emailValidation(newEmail)&& newPassword.length< 7&& newPassword=== newPasswordConfirm){
         alert('password is not long enough')
+    }else if(nameValidation(newName) && emailValidation(newEmail)&& newPassword.length< 7&& newPassword!== newPasswordConfirm){
+        alert('passwords do not match')
     }else{
         alert('Something went wrong, please try again.')
     }
@@ -79,6 +84,10 @@ class Signup extends React.Component {
                 <Form.Group controlId="formGroupPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control name='password' type="password" placeholder="Password" />
+                </Form.Group>
+                <Form.Group controlId="formGroupConfirmPassword">
+                    <Form.Label>Confirm Password</Form.Label>
+                    <Form.Control name='confirm-password' type="password" placeholder="Password" />
                 </Form.Group>
             </Form>
 
