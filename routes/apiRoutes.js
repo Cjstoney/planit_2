@@ -19,14 +19,23 @@ module.exports = function(app){
         const newUser = {
             email : req.body.userPayload.email,
             name : req.body.userPayload.Name,
-            password : req.body.userPayload.password
+            password : req.body.userPayload.password,
+            confirm :req.body.userPayload.confirm
         }
-        console.log(newUser, "newUser")
+        // console.log(newUser, "newUser")
         let errors = {}
         if(helpers.emptyString(newUser.email)){
             errors.email = 'Must not be empty'
         }else if (helpers.emailFormat(newUser.email)){
             errors.email = 'Must be a valid email'
+        }
+        if(helpers.emptyString(newUser.name)){
+            errors.name = 'Must include a name'
+        }
+        if(newUser.password === newUser.confirm){
+            // bcrypt stuff here.
+        }else{
+            errors.password = 'Passwords do not match'
         }
 
     })
