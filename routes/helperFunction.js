@@ -1,4 +1,4 @@
-var bcrypt = require("bcrypt");
+var bcrypt = require("bcryptjs");
 module.exports = {
   emptyString: function(string) {
     if (string.trim() === "") return true;
