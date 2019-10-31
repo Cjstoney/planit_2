@@ -1,4 +1,7 @@
 var helpers = require('./helperFunction')
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 
 module.exports = function(app){
     // attempt to deal with the cors problem
@@ -20,7 +23,7 @@ module.exports = function(app){
             email : req.body.userPayload.email,
             name : req.body.userPayload.Name,
             password : req.body.userPayload.password,
-            confirm :req.body.userPayload.confirm
+            confirm :req.body.userPayload.confirmation
         }
         // console.log(newUser, "newUser")
         let errors = {}
@@ -33,10 +36,13 @@ module.exports = function(app){
             errors.name = 'Must include a name'
         }
         if(newUser.password === newUser.confirm){
-            // bcrypt stuff here.
+            bcrypt.hash(newUser.password, saltRounds, function(err, hash) {
+                newUser.password = hash
+              });
         }else{
             errors.password = 'Passwords do not match'
         }
+        console.log(newUser.password, 'newUser.password')
 
     })
 

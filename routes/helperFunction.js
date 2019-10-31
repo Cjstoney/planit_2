@@ -1,4 +1,8 @@
 var bcrypt = require("bcryptjs");
+
+
+
+
 module.exports = {
   emptyString: function(string) {
     if (string.trim() === "") return true;
@@ -11,7 +15,7 @@ module.exports = {
     else return false;
   },
 
-  cryptPassword: function(password, callback) {
+  /*cryptPassword: function(password, callback) {
     bcrypt.genSalt(10, function(err, salt) {
       if (err) return callback(err);
 
@@ -25,5 +29,5 @@ module.exports = {
     bcrypt.compare(plainPass, hashword, function(err, isPasswordMatch) {
       return err == null ? callback(null, isPasswordMatch) : callback(err);
     });
-  }
+  }*/
 };
