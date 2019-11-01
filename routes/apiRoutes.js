@@ -1,6 +1,7 @@
 var helpers = require("./helperFunction");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+var db = require('../models')
 
 module.exports = function(app) {
   // attempt to deal with the cors problem
