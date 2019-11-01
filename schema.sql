@@ -1,0 +1,5 @@
+DROP DATABASE IF EXISTS calendarDB;
+CREATE DATABASE calendarDB;
+
+
+
