@@ -4,7 +4,7 @@ CREATE DATABASE calendarDB;
 USE calendarDB;
 
 CREATE TABLE `event`(
-    `id` INTEGER AUTO_INCREMENT NOT NULL,
+    `event_id` INTEGER AUTO_INCREMENT NOT NULL,
     `moment` VARCHAR(13),
     `event` VARCHAR(30) NOT NULL,
     `year` INTEGER NOT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE `event`(
     `important` BOOLEAN NOT NULL DEFAULT 0,
     `createdAt` INTEGER NOT NULL,
     `updatedAt` INTEGER NOT NULL,
-    PRIMARY KEY(id)
+    PRIMARY KEY(event_id)
 );
 
 INSERT INTO `events`(`event`,`year`,`month`, `day`,`finished`,`imortant`, `createdAt`, `updatedAt`) 
@@ -24,9 +24,9 @@ VALUES("Independence Day", 2019, 07, 04,false, false, 20150414, 20150414), ("Div
 
 
 CREATE TABLE user_info(
-    `id` INTEGER AUTO_INCREMENT NOT NULL,
+    `user_id` INTEGER AUTO_INCREMENT NOT NULL,
     `name` VARCHAR(30) NOT NULL,
     `email` VARCHAR(60) NOT NULL,
     `password` VARCHAR NOT NULL,
-    PRIMARY KEY(id)
+    PRIMARY KEY(user_id)
 );
