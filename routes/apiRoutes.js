@@ -1,6 +1,6 @@
 var helpers = require("./helperFunction");
-const bcrypt = require("bcrypt");
-const saltRounds = 10;
+// const bcrypt = require("bcrypt");
+// const saltRounds = 10;
 var db = require('../models')
 
 module.exports = function(app) {
@@ -45,10 +45,7 @@ module.exports = function(app) {
         return res.status(400).json(errors)
     }
 
-    bcrypt.hash(newUser.password, saltRounds, function(err, hash) {
-      newUser.password = hash;
-      console.log(newUser, "newUser.password");
-    });
+   
   });
 
   // ==========DELETE ROUTES============
