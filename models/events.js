@@ -2,15 +2,15 @@ module.exports = function(sequelize, DataType){
     var Events = sequelize.define('Events', {
         event_id:{
             type: DataType.INTEGER,
-            primarykey:TRUE
+            primarykey: 1
         },
-        event_name:DataType.String,
+        event_name:DataType.STRING,
         month: DataType.STRING,
         day:DataType.INTEGER,
         year:DataType.INTEGER,
         // do I need to make a relation here?
         important:DataType.BOOLEAN,
-        description: DataType.String
+        description: DataType.STRING
     })
     return Events
 }

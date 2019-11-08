@@ -1,6 +1,7 @@
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path')
-const routes = require('./routes/apiRoutes.js')
 var app = express();
 var db = require('./models')
 
@@ -8,9 +9,15 @@ const PORT = process.env.PORT || 3001
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-routes(app);
+let syncOptions = { force: false }
 
-db.sequelize.sync().then(function(){
+if (process.env.NODE_ENV === 'test'){
+  syncOptions.force = true;
+}
+
+require('./routes/apiRoutes')(app)
+
+db.sequelize.sync(syncOptions).then(function(){
   app.listen(PORT, function() {
       console.log(
         "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
