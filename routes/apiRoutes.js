@@ -1,4 +1,6 @@
 var helpers = require("./helperFunction");
+var Sequelize = require("sequelize");
+
 // const bcrypt = require("bcrypt");
 // const saltRounds = 10;
 var db = require('../models')
