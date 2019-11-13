@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
@@ -25,13 +27,10 @@ if (process.env.NODE_ENV === "test") {
 
 // Send every request to the React app
 // Define any API routes before this runs
-app.get("*", function (req, res) {
-  res.sendFile(path.join(__dirname, "client/build","index.html"));
+app.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"));
 });
 
-  app.listen(PORT, 
-    console.log(
-      "==> 🌎  Listening on port %s.",
-      PORT
-    )
-  );
+db.sequelize.sync(syncOptions).then(function() {
+  app.listen(PORT, console.log("==> 🌎  Listening on port %s.", PORT));
+});
