@@ -52,6 +52,7 @@ module.exports = function(app) {
         email:email,
         password:password
       }).then(user=>{
+        res.send('user added successfully')
         console.log('user added')
       }).catch(error=>{
         res.send(error)
