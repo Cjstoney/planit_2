@@ -24,27 +24,39 @@ module.exports = function(app) {
 
   // ==========POST ROUTES============
   app.post("/api/signup", (req, res) => {
-    const newUser = {
-      email: req.body.userPayload.email,
-      name: req.body.userPayload.Name,
-      password: req.body.userPayload.password,
-      confirm: req.body.userPayload.confirmation
-    };
+    
+      let email= req.body.userPayload.email
+      let name = req.body.userPayload.Name
+      let password= req.body.userPayload.password
+      let confirm= req.body.userPayload.confirmation
+   
     // console.log(newUser, "newUser")
     let errors = {};
-    if (helpers.emptyString(newUser.email)) {
+    if (helpers.emptyString(email)) {
       errors.email = "Must not be empty";
-    } else if (helpers.emailFormat(newUser.email)) {
-      errors.email = "Must be a valid email";
+    // } else if (helpers.emailFormat(email)) {
+    //   errors.email = "Must be a valid email";
     }
-    if (helpers.emptyString(newUser.name)) {
+    if (helpers.emptyString(name)) {
       errors.name = "Must include a name";
     }
-    if (newUser.password !== newUser.confirm) {
+    if (password !== confirm) {
       errors.password = "Passwords do not match";
     }
     if(Object.keys(errors).length>0){
+      console.log(errors)
         return res.status(400).json(errors)
+    }else{
+      db.Users.create({
+        name:name,
+        email:email,
+        password:password
+      }).then(user=>{
+        res.send('user added successfully')
+        console.log('user added')
+      }).catch(error=>{
+        res.send(error)
+      })
     }
 
    
