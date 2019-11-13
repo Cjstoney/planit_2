@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 
 require("./routes/apiRoutes")(app);
 
-let syncOptions = { force: false };
+let syncOptions = { force: true };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
@@ -32,5 +32,7 @@ app.get("*", function(req, res) {
 });
 
 db.sequelize.sync(syncOptions).then(function() {
-  app.listen(PORT, console.log("==> 🌎  Listening on port %s.", PORT));
+  app.listen(PORT, function(){ console.log("==> 🌎  Listening on port %s.", PORT)});
 });
+
+module.exports = app;
