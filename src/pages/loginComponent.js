@@ -30,8 +30,12 @@ const loginPayload = () => {
       })
       .then(function(response) {
           let user = response.data.response.user_id.toString()
-          console.log(user);
+        //   console.log(response);
           localStorage.setItem('key', user)
+          console.log(response.data.redir)
+          if (response.data.redir.redirect === '/calendar'){
+              window.location = '/calendar'
+          }
       })
       .catch(function(error) {
         console.log(error);
