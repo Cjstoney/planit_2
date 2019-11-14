@@ -65,33 +65,42 @@ module.exports = function(app) {
   });
 
   // ==== Route to login =====
-  app.post('/api/login', (req, res)=>{
+  app.post("/api/login", (req, res) => {
     let loginEmail = req.body.loginUserPayload.email;
     let loginPassword = req.body.loginUserPayload.password;
 
-    let errors={}
-    if(helpers.emptyString(loginEmail)){
-      errors.email = 'must include a valid email'
+    let errors = {};
+    if (helpers.emptyString(loginEmail)) {
+      errors.email = "must include a valid email";
     }
-    if(helpers.emptyString(loginPassword)){
-      errors.Password = 'must include a valid Password'
+    if (helpers.emptyString(loginPassword)) {
+      errors.Password = "must include a valid Password";
     }
-if(Object.keys(errors).length>0){
-  res.status(400).json(errors)
-}else{
-  db.Users.findAll({
-    where: {
-      email : loginEmail,
-      password : loginPassword
+    if (Object.keys(errors).length > 0) {
+      res.status(400).json(errors);
+    } else {
+      db.Users.findAll({
+        where: {
+          email: loginEmail,
+          password: loginPassword
+        }
+      })
+        .then(user => {
+          let resData = {}
+          resData.response = user[0].dataValues;
+          resData.redir = { redirect: "/calendar" };
+          if (user.length === 0) {
+            res.status(400).json("email or password is incorrect");
+          } else {
+            // create and send back a token for the user?
+            // redirect to the calendar page for specific user
+            res.status(201).json(resData);
+          }
+        })
+        .catch(errors => {
+          console.log(errors);
+        });
     }
-  }).then(user =>{
-    let response = user[0].dataValues;
-    console.log(user[0].dataValues)
-  }).catch(errors =>{
-    console.log(errors)
-  })
-}
-
-  })
+  });
   // ==========DELETE ROUTES============
 };
