@@ -3,7 +3,7 @@ var Sequelize = require("sequelize");
 
 // const bcrypt = require("bcrypt");
 // const saltRounds = 10;
-var db = require('../models')
+var db = require("../models");
 
 module.exports = function(app) {
   // attempt to deal with the cors problem
@@ -22,20 +22,21 @@ module.exports = function(app) {
 
   // ==========GET ROUTES============
 
-  // ==========POST ROUTES============
+  // ============================POST ROUTES==============================
+
+  // ====Route for signing up a new user===
   app.post("/api/signup", (req, res) => {
-    
-      let email= req.body.userPayload.email
-      let name = req.body.userPayload.Name
-      let password= req.body.userPayload.password
-      let confirm= req.body.userPayload.confirmation
-   
+    let email = req.body.userPayload.email;
+    let name = req.body.userPayload.Name;
+    let password = req.body.userPayload.password;
+    let confirm = req.body.userPayload.confirmation;
+
     // console.log(newUser, "newUser")
     let errors = {};
     if (helpers.emptyString(email)) {
       errors.email = "Must not be empty";
-    // } else if (helpers.emailFormat(email)) {
-    //   errors.email = "Must be a valid email";
+      // } else if (helpers.emailFormat(email)) {
+      //   errors.email = "Must be a valid email";
     }
     if (helpers.emptyString(name)) {
       errors.name = "Must include a name";
@@ -43,24 +44,63 @@ module.exports = function(app) {
     if (password !== confirm) {
       errors.password = "Passwords do not match";
     }
-    if(Object.keys(errors).length>0){
-      console.log(errors)
-        return res.status(400).json(errors)
-    }else{
+    if (Object.keys(errors).length > 0) {
+      console.log(errors);
+      return res.status(400).json(errors);
+    } else {
       db.Users.create({
-        name:name,
-        email:email,
-        password:password
-      }).then(user=>{
-        res.send('user added successfully')
-        console.log('user added')
-      }).catch(error=>{
-        res.send(error)
+        name: name,
+        email: email,
+        password: password
       })
+        .then(user => {
+          let redir = { redirect: "/calendar" };
+          res.status(201).json(redir);
+          console.log("user added");
+        })
+        .catch(error => {
+          res.send(error);
+        });
     }
-
-   
   });
 
+  // ==== Route to login =====
+  app.post("/api/login", (req, res) => {
+    let loginEmail = req.body.loginUserPayload.email;
+    let loginPassword = req.body.loginUserPayload.password;
+
+    let errors = {};
+    if (helpers.emptyString(loginEmail)) {
+      errors.email = "must include a valid email";
+    }
+    if (helpers.emptyString(loginPassword)) {
+      errors.Password = "must include a valid Password";
+    }
+    if (Object.keys(errors).length > 0) {
+      res.status(400).json(errors);
+    } else {
+      db.Users.findAll({
+        where: {
+          email: loginEmail,
+          password: loginPassword
+        }
+      })
+        .then(user => {
+          let resData = {}
+          resData.response = user[0].dataValues;
+          resData.redir = { redirect: "/calendar" };
+          if (user.length === 0) {
+            res.status(400).json("email or password is incorrect");
+          } else {
+            // create and send back a token for the user?
+            // redirect to the calendar page for specific user
+            res.status(201).json(resData);
+          }
+        })
+        .catch(errors => {
+          console.log(errors);
+        });
+    }
+  });
   // ==========DELETE ROUTES============
 };
