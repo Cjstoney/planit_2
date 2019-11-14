@@ -40,13 +40,16 @@ const newUserPayload = () =>{
             })
                   .then(function(response){
                   console.log(response)
+                  if(response.data.redirect === '/calendar'){
+                    window.location = "/calendar"
+                  }
                 })
                 .catch(function(error){
                   console.log(error)
                 })
 
         // clear all input fields
-        console.log(userPayload)
+        // console.log(userPayload)
     }else if (nameValidation(newName) === false && emailValidation(newEmail)&& newPassword.length>=7&& newPassword=== newPasswordConfirm){
         alert('You need to enter a first and last name')
     }else if (nameValidation(newName) && emailValidation(newEmail)=== false&& newPassword.length>=7&& newPassword=== newPasswordConfirm){
