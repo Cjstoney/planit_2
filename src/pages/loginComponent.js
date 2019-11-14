@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-//import axios from 'axios'
+import axios from 'axios'
 
 // simple test for email format. Stricter validation to be done on the backend.
 const emailValidation=(email)=>{
@@ -20,7 +20,7 @@ const loginPayload=()=>{
         }
         console.log('loginUserPayload to be sent to the backend ', loginUserPayload)
         
-        /*axios.post('http://localhost:3001/api/newuser', {
+        axios.post('http://localhost:3001/api/login', {
                loginUserPayload
             })
                   .then(function(response){
@@ -28,7 +28,7 @@ const loginPayload=()=>{
                 })
                 .catch(function(error){
                   console.log(error)
-                })*/
+                })
 
     }else if(emailValidation(loginEmail) && loginPassword.length<7){
         alert("password is not long enough")
