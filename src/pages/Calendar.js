@@ -1,21 +1,30 @@
 import React from "react";
 import Calendar from "react-calendar";
 import ToDo from "../components/todo";
+import axios from "axios";
+
 
 const getDate = input => {
   let dateString = input.toString();
-  let payload = {};
+  let monthPayload = {};
   let dateArray = dateString.split(" ");
-
+  let uid = window.localStorage.getItem('uid')
   if (dateString.length > 20) {
-    payload = {
+    monthPayload = {
       dayOfWeek: dateArray[0],
       month: dateArray[1],
       dayOfMonth: dateArray[2],
-      year: dateArray[3]
+      year: dateArray[3],
+      user: uid
     };
-    console.log(payload);
-    return payload; // replace this with an ajax or axios call when the routes are complete
+    console.log(monthPayload);
+    axios.get("http://localhost:3001/api/month", {
+      monthPayload
+    }).then(response =>{
+
+    }).catch(error =>{
+      console.log(error)
+    })
   }
 };
 

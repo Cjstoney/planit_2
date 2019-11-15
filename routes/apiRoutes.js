@@ -21,7 +21,26 @@ module.exports = function(app) {
   });
 
   // ==========GET ROUTES============
-
+app.get('/api/month', (req,res)=>{
+  let monthErrors = {}
+  let month = req.body.monthPayload.month
+  let user = req.body.monthPayload.user
+  if(helpers.emptyString(month)){
+    monthErrors.month = "invalid month"
+  }
+  if(Object.keys(monthErrors).length>0){
+    res.status(400).json(monthErrors)
+  }else{
+    db.Events.findAll({
+      where: {
+        user_id : user,
+        month : month
+      }
+    }).then(month=>{
+      console.log(month)
+    })
+  }
+})
   // ============================POST ROUTES==============================
 
   // ====Route for signing up a new user===

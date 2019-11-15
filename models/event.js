@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes){
-    const Event = sequelize.define('Events', {
+    const Events = sequelize.define('Events', {
         Event_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -27,5 +27,5 @@ module.exports = function (sequelize, DataTypes){
               allowNull: true
           }
     });
-    return Event;
+    return Events;
 }
