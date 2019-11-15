@@ -21,20 +21,24 @@ module.exports = function(app) {
   });
 
   // ==========GET ROUTES============
-app.get('/api/month', (req,res)=>{
+app.post('/api/month', (req,res)=>{
   let monthErrors = {}
-  let month = req.body.monthPayload.month
+  console.log('month', req.body)
+  let bmonth = req.body.monthPayload.month
   let user = req.body.monthPayload.user
-  if(helpers.emptyString(month)){
+  let year = req.body.monthPayload.year
+  if(helpers.emptyString(bmonth)){
     monthErrors.month = "invalid month"
+  }
+  if(helpers.emptyString(year)){
+    monthErrors.year = "invalid year"
   }
   if(Object.keys(monthErrors).length>0){
     res.status(400).json(monthErrors)
   }else{
     db.Events.findAll({
       where: {
-        user_id : user,
-        month : month,
+        month : bmonth,
         year : year
       }
       // ==================need to work on the relational aspect of the sequelize model now

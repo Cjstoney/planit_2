@@ -13,6 +13,10 @@ module.exports = function (sequelize, DataTypes){
             type: DataTypes.STRING,
             allowNull: false
           },
+          day:{
+            type:DataTypes.INTEGER,
+            allowNull: false
+          },
           year: {
             type: DataTypes.INTEGER,
             allowNull: false
