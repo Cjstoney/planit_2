@@ -34,8 +34,10 @@ app.get('/api/month', (req,res)=>{
     db.Events.findAll({
       where: {
         user_id : user,
-        month : month
+        month : month,
+        year : year
       }
+      // ==================need to work on the relational aspect of the sequelize model now
     }).then(month=>{
       console.log(month)
     })
