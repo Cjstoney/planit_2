@@ -44,6 +44,7 @@ app.post('/api/month', (req,res)=>{
       // ==================need to work on the relational aspect of the sequelize model now
     }).then(month=>{
       console.log(month)
+      res.json(month)
     })
   }
 })

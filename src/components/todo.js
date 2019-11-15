@@ -13,7 +13,7 @@ const getDate = input => {
       dayOfMonth: dateArray[2],
       year: dateArray[3]
     };
-    console.log("todo ", payload);
+    // console.log("todo ", payload);
     axios.get('route').then(res => {
         this.setState({
             items: res.data

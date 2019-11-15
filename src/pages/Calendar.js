@@ -16,12 +16,14 @@ const getDate = input => {
       year: dateArray[3],
       user: uid
     };
-    console.log("fsmonth", monthPayload);
+    // console.log("fsmonth", monthPayload);
     axios
       .post("http://localhost:3001/api/month", {
      monthPayload
       })
-      .then(response => {})
+      .then(response => {
+        console.log(response, 'response')
+      })
       .catch(error => {
         console.log(error);
       });
