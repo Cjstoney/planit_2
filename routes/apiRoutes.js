@@ -1,5 +1,6 @@
 var helpers = require("./helperFunction");
 var Sequelize = require("sequelize");
+const Op = require('Sequelize').Op;
 
 // const bcrypt = require("bcrypt");
 // const saltRounds = 10;
@@ -37,7 +38,7 @@ app.post('/api/month', (req,res)=>{
     res.status(400).json(monthErrors)
   }else{
     db.Events.findAll({
-      where: {[$and]: [{month: {[$eq]: bmonth}}, {year: {[$eq]: year}}, {[$or]: [{UserUserId: null}, {UserUserId: {[$eq]: user}}]}]},
+      where: {[Op.and]: [{month: {[Op.eq]: bmonth}}, {year: {[Op.eq]: year}}, {[Op.or]: [{UserUserId: null}, {UserUserId: {[Op.eq]: user}}]}]},
       
       // ==================need to work on the relational aspect of the sequelize model now
     }).then(month=>{
