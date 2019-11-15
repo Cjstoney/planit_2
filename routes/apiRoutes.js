@@ -1,5 +1,6 @@
 var helpers = require("./helperFunction");
 var Sequelize = require("sequelize");
+const Op = require('Sequelize').Op;
 
 // const bcrypt = require("bcrypt");
 // const saltRounds = 10;
@@ -21,25 +22,28 @@ module.exports = function(app) {
   });
 
   // ==========GET ROUTES============
-app.get('/api/month', (req,res)=>{
+app.post('/api/month', (req,res)=>{
   let monthErrors = {}
-  let month = req.body.monthPayload.month
+  console.log('month', req.body)
+  let bmonth = req.body.monthPayload.month
   let user = req.body.monthPayload.user
-  if(helpers.emptyString(month)){
+  let year = req.body.monthPayload.year
+  if(helpers.emptyString(bmonth)){
     monthErrors.month = "invalid month"
+  }
+  if(helpers.emptyString(year)){
+    monthErrors.year = "invalid year"
   }
   if(Object.keys(monthErrors).length>0){
     res.status(400).json(monthErrors)
   }else{
     db.Events.findAll({
-      where: {
-        user_id : user,
-        month : month,
-        year : year
-      }
+      where: {[Op.and]: [{month: {[Op.eq]: bmonth}}, {year: {[Op.eq]: year}}, {[Op.or]: [{UserUserId: null}, {UserUserId: {[Op.eq]: user}}]}]},
+      
       // ==================need to work on the relational aspect of the sequelize model now
     }).then(month=>{
       console.log(month)
+      res.json(month)
     })
   }
 })

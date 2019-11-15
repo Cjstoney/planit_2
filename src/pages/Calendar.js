@@ -3,28 +3,30 @@ import Calendar from "react-calendar";
 import ToDo from "../components/todo";
 import axios from "axios";
 
-
 const getDate = input => {
   let dateString = input.toString();
   let monthPayload = {};
   let dateArray = dateString.split(" ");
-  let uid = window.localStorage.getItem('uid')
+  let uid = window.localStorage.getItem("uid");
   if (dateString.length > 20) {
     monthPayload = {
-      dayOfWeek: dateArray[0],
       month: dateArray[1],
+      dayOfWeek: dateArray[0],
       dayOfMonth: dateArray[2],
       year: dateArray[3],
       user: uid
     };
-    console.log(monthPayload);
-    axios.get("http://localhost:3001/api/month", {
-      monthPayload
-    }).then(response =>{
-
-    }).catch(error =>{
-      console.log(error)
-    })
+    // console.log("fsmonth", monthPayload);
+    axios
+      .post("http://localhost:3001/api/month", {
+     monthPayload
+      })
+      .then(response => {
+        console.log(response, 'response')
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 };
 
