@@ -37,10 +37,8 @@ app.post('/api/month', (req,res)=>{
     res.status(400).json(monthErrors)
   }else{
     db.Events.findAll({
-      where: {
-        month : bmonth,
-        year : year
-      }
+      where: {[$and]: [{month: {[$eq]: bmonth}}, {year: {[$eq]: year}}, {[$or]: [{UserUserId: null}, {UserUserId: {[$eq]: user}}]}]},
+      
       // ==================need to work on the relational aspect of the sequelize model now
     }).then(month=>{
       console.log(month)
