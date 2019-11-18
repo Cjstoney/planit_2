@@ -14,12 +14,6 @@ const nameValidation = (name)=>{
     return /^[a-zA-Z]+(?:-[a-zA-Z]+)* [a-zA-Z]+(?:-[a-zA-Z]+)*/.test(name)
 }
 
-
-// clearing the input function
-const clearInput = (target) =>{
-    
-}
-
 // function to capture all inputs and package it up to send to db
 const newUserPayload = () =>{
     let userPayload = {};
