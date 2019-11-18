@@ -39,7 +39,6 @@ class ToDo extends React.Component {
   }
 
   componentDidMount() {
-   let payload = this.props.date  
   }
 
   componentDidUpdate(prevProps) {
