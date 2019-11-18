@@ -64,8 +64,7 @@ class CalendarComp extends React.Component {
 }
 
   render() {
-    if (this.state.monthBdown !== null){
-    console.log(this.state, "this.state")}
+  
     return (
       <div>
         {/* <div onClick={getDate}> */}
