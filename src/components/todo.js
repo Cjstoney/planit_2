@@ -1,7 +1,7 @@
 import React from "react";
 import axios from 'axios';
 
-const getDate = input => {
+/*const getDate = input => {
   let dateString = input.toString();
   let payload = {};
   let dateArray = dateString.split(" ");
@@ -14,40 +14,85 @@ const getDate = input => {
       year: dateArray[3]
     };
     // console.log("todo ", payload);
-    axios.get('route').then(res => {
-        this.setState({
-            items: res.data
-        })
-    }); // replace this with an ajax or axios call when the routes are complete
-  }
-};
+    axios
+    .post("http://localhost:3001/api/month", {
+      monthPayload
+    })
+    .then(response => {
+      console.log(response, "response");
+      return response;
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
+};*/
+ 
 
 
 class ToDo extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      date: props.date,
       items: null
     };
   }
 
   componentDidMount() {
-    getDate(this.state.date);
+   let payload = this.props.date  
   }
 
-  render() {
+  componentDidUpdate(prevProps) {
+    if (this.props.date !== prevProps.date) {
+      let todoItems = this.props.date
+      // console.log(todoItems, "todo")
 
-    let listItem = this.state.items ? (
-        <ul className='todo-list'>
-            {this.state.items.map(function(e,idx,arr){
-                console.log(e)
-                return(
-                    <li className={"list-item-"+ e.id} key={e.id}>{e.name}</li>
-                )
-            })}
-        </ul>
-    ):(<h2>Nothing to do</h2>)
+      let payload = {
+        dayOfWeek: todoItems.dayOfWeek,
+        month: todoItems.month,
+        dayOfMonth: todoItems.dayOfMonth,
+        year: todoItems.year,
+        user: todoItems.user
+      };
+      // console.log("todo ", payload);
+      axios
+      .post("http://localhost:3001/api/month", {
+       payload
+      })
+      .then(response => {
+        console.log(response, "response");
+        this.setState({
+          items: response.data
+        })
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+    }
+  
+  
+
+  render() {
+    let postItem = this.state.items?(
+      <ul className= 'postItem'>
+        {
+          this.state.items.map(function(e, idx, arr){
+            console.log(e)
+            return(
+              <li className='returnedEvents' key={e.Event_id} id={e.Event_id}>
+                {e.name}
+                <div className='itemDate'>{e.month}</div>
+                <div className='itemDate'>{e.day}</div>
+                <div className='itemDate'>{e.year}</div>
+                <div className='itemDescription'>{e.description}</div>
+                
+                </li>
+            )
+          }
+          )}
+      </ul>
+    ):(<h1>Nothing to See here</h1>)
     return (
       // create a div that will have the title of "todo"
       // needs to have a add new todo button on the bottom of the container
@@ -55,8 +100,8 @@ class ToDo extends React.Component {
       // if there is something to do, render it as a list item.
       // list item needs to have a button for complete and trash
       <div>
-        <h3 className="todo-title">To-do!</h3>
-        <div>{listItem}</div>
+        <h3 className="todo-title">Events this month</h3>
+        <div>{postItem}</div>
         <button className="add-button-container">
           <img src="./icons/iconfinder_plus_alt_118618.png" alt="add-button" />
         </button>
