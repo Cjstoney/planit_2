@@ -15,8 +15,10 @@ class CalendarComp extends React.Component {
   onChange = value => this.setState({ value });
 
   componentDidUpdate() {
-    // getDate(this.state.value);
+    console.log(this.state.monthBdown, "prev")
+    // console.log(this.state.value)
   }
+  
 
   componentDidMount() {
     let dateString = this.state.value.toString();
@@ -33,14 +35,15 @@ class CalendarComp extends React.Component {
       };
       this.setState({ monthBdown: monthPayload });
     }
+    console.log(this.state.value)
   }
 
   render() {
     return (
       <div>
-        {/* <div onClick={getDate}> */}
+        <div >
         <Calendar onChange={this.onChange} value={this.state.date} />
-        {/* </div> */}
+        </div>
         <ToDo date={this.state.monthBdown} />
         <DailyTodo date={this.state.monthBdown} />
       </div>
