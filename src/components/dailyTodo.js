@@ -11,15 +11,15 @@ class DailyTodo extends React.Component{
 
     componentDidUpdate(prevProps) {
         if (this.props.date !== prevProps.date) {
-          let todoItems = this.props.date
-          // console.log(todoItems, "todo")
+          let dailyTodoItems = this.props.date
+          // console.log(dailyTodoItems, "todo")
     
           let payload = {
-            dayOfWeek: todoItems.dayOfWeek,
-            month: todoItems.month,
-            dayOfMonth: todoItems.dayOfMonth,
-            year: todoItems.year,
-            user: todoItems.user
+            dayOfWeek: dailyTodoItems.dayOfWeek,
+            month: dailyTodoItems.month,
+            dayOfMonth: dailyTodoItems.dayOfMonth,
+            year: dailyTodoItems.year,
+            user: dailyTodoItems.user
           };
           // console.log("todo ", payload);
           axios
@@ -29,7 +29,7 @@ class DailyTodo extends React.Component{
           .then(response => {
            
             this.setState({
-              items: response.data
+              dailyItems: response.data
             })
           })
           .catch(error => {
@@ -39,16 +39,13 @@ class DailyTodo extends React.Component{
         }
 
     render(){
-        let dailyitemTodo = this.state.items?(
-            <ul className= 'dailyitemTodo'>
+        let dailyitemTodo = this.state.dailyItems?(
+            <ul className= 'dailyitemTodo'> {this.state.dailyItems.day}
               {
-                this.state.items.map(function(e, idx, arr){
+                this.state.dailyItems.map(function(e, idx, arr){
                   return(
                     <li className='returnedEvents' key={e.Event_id} id={e.Event_id}>
                       {e.name}
-                      <div className='itemDate'>{e.month}</div>
-                      <div className='itemDate'>{e.day}</div>
-                      <div className='itemDate'>{e.year}</div>
                       <div className='itemDescription'>{e.description}</div>
                       
                       </li>
