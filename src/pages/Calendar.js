@@ -1,6 +1,7 @@
 import React from "react";
 import Calendar from "react-calendar";
 import ToDo from "../components/todo";
+import DailyTodo from "../components/dailyTodo";
 
 class CalendarComp extends React.Component {
   constructor() {
@@ -41,6 +42,7 @@ class CalendarComp extends React.Component {
         <Calendar onChange={this.onChange} value={this.state.date} />
         {/* </div> */}
         <ToDo date={this.state.monthBdown} />
+        <DailyTodo date={this.state.monthBdown} />
       </div>
     );
   }
