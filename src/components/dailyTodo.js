@@ -39,10 +39,28 @@ class DailyTodo extends React.Component{
         }
 
     render(){
+        let dailyitemTodo = this.state.items?(
+            <ul className= 'dailyitemTodo'>
+              {
+                this.state.items.map(function(e, idx, arr){
+                  return(
+                    <li className='returnedEvents' key={e.Event_id} id={e.Event_id}>
+                      {e.name}
+                      <div className='itemDate'>{e.month}</div>
+                      <div className='itemDate'>{e.day}</div>
+                      <div className='itemDate'>{e.year}</div>
+                      <div className='itemDescription'>{e.description}</div>
+                      
+                      </li>
+                  )
+                }
+                )}
+            </ul>
+          ):(<h1>Nothing to See here</h1>)
         return(
             <div>
             <h3 className="todo-title">Events this month</h3>
-            <div className='daily-Todo-container'></div>
+            <div className='daily-Todo-container'>{dailyitemTodo}</div>
             
           </div>
         )
