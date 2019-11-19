@@ -16,12 +16,13 @@ module.exports = function(app) {
     );
     next();
   });
-
+  
   app.get("/", function(req, res) {
     res.status(200).send("Hello World");
   });
-
+  
   // ==========GET ROUTES============
+  // ============================POST ROUTES==============================
   app.post("/api/month", (req, res) => {
     let monthErrors = {};
     console.log("month", req.body);
@@ -47,15 +48,48 @@ module.exports = function(app) {
             }
           ]
         }
-
-        // ==================need to work on the relational aspect of the sequelize model now
       }).then(month => {
         // console.log(month);
         res.json(month);
       });
     }
   });
-  // ============================POST ROUTES==============================
+
+  // =====Rout for the list of daily items
+  app.post("/api/day", (req, res) => {
+    let monthErrors = {};
+    console.log("month", req.body);
+    let bmonth = req.body.payload.month;
+    let user = req.body.payload.user;
+    let year = req.body.payload.year;
+    let day = req.body.payload.dayOfMonth
+    if (helpers.emptyString(bmonth)) {
+      monthErrors.month = "invalid month";
+    }
+    if (helpers.emptyString(year)) {
+      monthErrors.year = "invalid year";
+    }
+    if (Object.keys(monthErrors).length > 0) {
+      res.status(400).json(monthErrors);
+    } else {
+      db.Events.findAll({
+        where: {
+          [Op.and]: [
+            { month: { [Op.eq]: bmonth } },
+            { year: { [Op.eq]: year } },
+            {day: {[Op.eq]: day } },
+            {
+              [Op.or]: [{ UserUserId: null }, { UserUserId: { [Op.eq]: user } }]
+            }
+          ]
+        }
+      }).then(month => {
+        // console.log(month);
+        res.json(month);
+      });
+    }
+  });
+  
 
   // ====Route for signing up a new user===
   app.post("/api/signup", (req, res) => {
@@ -69,7 +103,7 @@ module.exports = function(app) {
     if (helpers.emptyString(email)) {
       errors.email = "Must not be empty";
       // } else if (helpers.emailFormat(email)) {
-      //   errors.email = "Must be a valid email";
+      //   errors.email = "Must be a valid email";================================================== still need to work on email validation
     }
     if (helpers.emptyString(name)) {
       errors.name = "Must include a name";
