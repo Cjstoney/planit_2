@@ -70,9 +70,7 @@ class ToDo extends React.Component {
       <div>
         <h3 className="todo-title">Events this month</h3>
         <div>{postItem}</div>
-        <button className="add-button-container">
-          <img src="./icons/iconfinder_plus_alt_118618.png" alt="add-button" />
-        </button>
+        
       </div>
     );
   }
