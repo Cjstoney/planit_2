@@ -1,22 +1,23 @@
 import React from "react";
 import Calendar from "react-calendar";
 import ToDo from "../components/todo";
-import DailyTodo from "../components/dailyTodo";
+// import axios from "axios";
 
 class CalendarComp extends React.Component {
   constructor() {
     super();
     this.state = {
       value: new Date(),
-      monthBdown: null
+      monthBdown: null,
+      day: null
     };
   }
-
   onChange = value => this.setState({ value });
-
+  onClickDay = day => this.setState({day})
+  
   componentDidUpdate() {
-    console.log(this.state.monthBdown, "prev")
-    // console.log(this.state.value)
+    // getDate(this.state.value);
+    console.log(this.state)
   }
   
 
@@ -35,17 +36,13 @@ class CalendarComp extends React.Component {
       };
       this.setState({ monthBdown: monthPayload });
     }
-    console.log(this.state.value)
   }
-
+  
   render() {
     return (
-      <div>
-        <div >
-        <Calendar onChange={this.onChange} value={this.state.date} />
-        </div>
-        <ToDo date={this.state.monthBdown} />
-        <DailyTodo date={this.state.monthBdown} />
+      <div onClick={this.getDate}>
+      <Calendar  onChange={this.onChange} value={this.state.date} onClickDay={this.onClickDay} />
+        <ToDo date={this.state.monthBdown} day={this.state.day} />
       </div>
     );
   }

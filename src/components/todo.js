@@ -32,34 +32,37 @@ import axios from 'axios';
 
 class ToDo extends React.Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       items: null
     };
   }
 
   componentDidMount() {
+   
+   console.log(this.props.day) 
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.date !== prevProps.date) {
-      let todoItems = this.props.date
-      // console.log(todoItems, "todo")
+    if (this.props.day!== prevProps.day) {
+      let stringDate = this.props.day.toString()
+      const array = stringDate.split(" ")
+      const user = window.localStorage.getItem('uid')
+      let payload={}
+      console.log(array, 'array')
 
-      let payload = {
-        dayOfWeek: todoItems.dayOfWeek,
-        month: todoItems.month,
-        dayOfMonth: todoItems.dayOfMonth,
-        year: todoItems.year,
-        user: todoItems.user
+     payload = {
+        month: array[1],
+        year: array[3],
+        user: user
       };
-      // console.log("todo ", payload);
+      console.log("todo ", payload);
       axios
       .post("http://localhost:3001/api/month", {
        payload
       })
       .then(response => {
-       
+        // console.log(response, "response");
         this.setState({
           items: response.data
         })
