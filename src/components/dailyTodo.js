@@ -10,18 +10,25 @@ class DailyTodo extends React.Component{
 
     }
 
+    componentDidMount(){
+      console.log(this.props.day)
+    }
+
     componentDidUpdate(prevProps) {
         // console.log(this.props.date)
-        if (this.props.date !== prevProps.date) {
-          let dailyTodoItems = this.props.date
-        //   console.log(dailyTodoItems, "todo")
-    
-          let payload = {
-            dayOfWeek: dailyTodoItems.dayOfWeek,
-            month: dailyTodoItems.month,
-            dayOfMonth: dailyTodoItems.dayOfMonth,
-            year: dailyTodoItems.year,
-            user: dailyTodoItems.user
+        if (this.props.day !== prevProps.day) {
+          // let dailyTodoItems = this.props.date
+          console.log(this.props.day, "daily")
+          let dailyStringDate = this.props.day.toString();
+          const array = dailyStringDate.split(" ");
+          const dailyUser = window.localStorage.getItem('uid')
+        let payload = {} 
+          console.log(array)
+          payload = {
+            month: array[1],
+            dayOfMonth: array[2],
+            year: array[3],
+            user: dailyUser
           };
           // console.log("todo ", payload);
           axios

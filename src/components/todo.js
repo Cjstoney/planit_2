@@ -10,7 +10,7 @@ class ToDo extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.day);
+    // console.log(this.props.day);
   }
 
   componentDidUpdate(prevProps) {
@@ -19,14 +19,14 @@ class ToDo extends React.Component {
       const array = stringDate.split(" ");
       const user = window.localStorage.getItem("uid");
       let payload = {};
-      console.log(array, "array");
+      // console.log(array, "array");
 
       payload = {
         month: array[1],
         year: array[3],
         user: user
       };
-      console.log("todo ", payload);
+      // console.log("todo ", payload);
       axios
         .post("http://localhost:3001/api/month", {
           payload
@@ -70,9 +70,7 @@ class ToDo extends React.Component {
       <div>
         <h3 className="todo-title">Events this month</h3>
         <div>{postItem}</div>
-        <button className="add-button-container">
-          <img src="./icons/iconfinder_plus_alt_118618.png" alt="add-button" />
-        </button>
+        
       </div>
     );
   }
