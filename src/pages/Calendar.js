@@ -20,6 +20,7 @@ class CalendarComp extends React.Component {
     console.log(this.state)
   }
   
+
   componentDidMount() {
     let dateString = this.state.value.toString();
     let monthPayload = {};

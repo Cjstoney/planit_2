@@ -80,7 +80,6 @@ class ToDo extends React.Component {
       <ul className= 'postItem'>
         {
           this.state.items.map(function(e, idx, arr){
-            // console.log(e)
             return(
               <li className='returnedEvents' key={e.Event_id} id={e.Event_id}>
                 {e.name}
