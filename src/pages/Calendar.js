@@ -2,6 +2,7 @@ import React from "react";
 import Calendar from "react-calendar";
 import ToDo from "../components/todo";
 import DailyTodo from "../components/dailyTodo";
+import AddEvent from "../components/AddEvent";
 // import axios from "axios";
 
 class CalendarComp extends React.Component {
@@ -45,6 +46,7 @@ class CalendarComp extends React.Component {
       <Calendar  onChange={this.onChange} value={this.state.date} onClickDay={this.onClickDay} />
         <ToDo date={this.state.monthBdown} day={this.state.day} />
         <DailyTodo day={this.state.day} />
+        <AddEvent day={this.state.day} />
       </div>
     );
   }

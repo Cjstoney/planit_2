@@ -1,5 +1,7 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import axios from 'axios'
 
 class AddEvent extends React.Component {
     constructor(props){
@@ -8,6 +10,40 @@ class AddEvent extends React.Component {
 
      }
     }
+    
+    addEventpayload = ()=>{
+        const eventName = document.getElementsByName('event-name')[0].value;
+        const eventDesc = document.getElementsByName('event-Description')[0].value;
+        const dateString = this.props.day.toString()
+        const dateArray = dateString.split(' ')
+        const eventUser = window.localStorage.getItem('uid')
+        let payload ={}
+
+        payload = {
+        day : dateArray[2],
+        month : dateArray[1],
+        year : dateArray[3],
+        user : eventUser,
+        event: eventName,
+        description : eventDesc
+        }
+        console.log(payload)
+
+        axios.post('http://;ocalhost:3001/api/addevent', {
+            payload
+        }).then(
+            response =>{
+                console.log(response)
+            }
+        ).catch(error =>{
+            console.log(error)
+        })
+    }
+
+    componentDidMount(){
+        console.log('[addevent] we made it')
+    }
+
 
     render(){
         return(
@@ -24,7 +60,7 @@ class AddEvent extends React.Component {
           </Form.Group> 
         </Form>
         <Button
-          onClick={}
+          onClick={this.addEventpayload}
           variant="outline-primary"
           className="login"
         >
