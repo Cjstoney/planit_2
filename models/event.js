@@ -2,7 +2,7 @@ module.exports = function (sequelize, DataTypes){
     const Events = sequelize.define('Events', {
         Event_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            autoIncrement: true,
             primaryKey: true
           },
           name: {

@@ -16,11 +16,11 @@ module.exports = function(app) {
     );
     next();
   });
-  
+
   app.get("/", function(req, res) {
     res.status(200).send("Hello World");
   });
-  
+
   // ==========GET ROUTES============
   // ============================POST ROUTES==============================
   app.post("/api/month", (req, res) => {
@@ -62,7 +62,7 @@ module.exports = function(app) {
     let bmonth = req.body.payload.month;
     let user = req.body.payload.user;
     let year = req.body.payload.year;
-    let day = req.body.payload.dayOfMonth
+    let day = req.body.payload.dayOfMonth;
     if (helpers.emptyString(bmonth)) {
       monthErrors.month = "invalid month";
     }
@@ -77,7 +77,7 @@ module.exports = function(app) {
           [Op.and]: [
             { month: { [Op.eq]: bmonth } },
             { year: { [Op.eq]: year } },
-            {day: {[Op.eq]: day } },
+            { day: { [Op.eq]: day } },
             {
               [Op.or]: [{ UserUserId: null }, { UserUserId: { [Op.eq]: user } }]
             }
@@ -89,7 +89,42 @@ module.exports = function(app) {
       });
     }
   });
-  
+
+  app.post("/api/addevent", (req, res) => {
+    const eventName = req.body.payload.event;
+    const eventDesc = req.body.payload.description;
+    const eventDay = req.body.payload.day;
+    const eventMonth = req.body.payload.month;
+    const eventYear = req.body.payload.year;
+    const username = req.body.payload.user;
+
+    const errors = {};
+
+    if (helpers.emptyString(eventName)) {
+      errors.eventName = "Must not be empty";
+    }
+    if (Object.keys(errors).length > 0) {
+      console.log(errors);
+      res.status(400).json(errors);
+    } else {
+      db.Events.create({
+        Event_id : null,
+        name: eventName,
+        description: eventDesc,
+        day: eventDay,
+        month: eventMonth,
+        year: eventYear,
+        UserUserId: username
+      })
+        .then(response => {
+          console.log(response, "user added");
+          res.status(201).send("event added");
+        })
+        .catch(error => {
+          res.send(error);
+        });
+    }
+  });
 
   // ====Route for signing up a new user===
   app.post("/api/signup", (req, res) => {
