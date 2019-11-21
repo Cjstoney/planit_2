@@ -29,7 +29,7 @@ class AddEvent extends React.Component {
         }
         console.log(payload)
 
-        axios.post('http://;ocalhost:3001/api/addevent', {
+        axios.post('http://localhost:3001/api/addevent', {
             payload
         }).then(
             response =>{
