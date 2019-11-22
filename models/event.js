@@ -29,6 +29,10 @@ module.exports = function (sequelize, DataTypes){
           description:{
               type: DataTypes.STRING,
               allowNull: true
+          },
+          user:{
+            type:DataTypes.INTEGER,
+            allowNull: true
           }
     });
     return Events;

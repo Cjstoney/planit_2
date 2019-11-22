@@ -44,7 +44,7 @@ module.exports = function(app) {
             { month: { [Op.eq]: bmonth } },
             { year: { [Op.eq]: year } },
             {
-              [Op.or]: [{ UserUserId: null }, { UserUserId: { [Op.eq]: user } }]
+              [Op.or]: [{ user: null }, { user: { [Op.eq]: user } }]
             }
           ]
         }
@@ -79,7 +79,7 @@ module.exports = function(app) {
             { year: { [Op.eq]: year } },
             { day: { [Op.eq]: day } },
             {
-              [Op.or]: [{ UserUserId: null }, { UserUserId: { [Op.eq]: user } }]
+              [Op.or]: [{ user: null }, { user: { [Op.eq]: user } }]
             }
           ]
         }
@@ -114,7 +114,7 @@ module.exports = function(app) {
         day: eventDay,
         month: eventMonth,
         year: eventYear,
-        UserUserId: username
+        user: username
       })
         .then(response => {
           console.log(response, "user added");
@@ -156,9 +156,12 @@ module.exports = function(app) {
         password: password
       })
         .then(user => {
-          let redir = { redirect: "/calendar" };
-          res.status(201).json(redir);
-          console.log("user added");
+          console.log(user.dataValues, "user added");
+          let newUserRes = {}
+         newUserRes.response= user.dataValues
+        //  console.log(response)
+          newUserRes.redir = { redirect: "/calendar" };
+          res.status(201).json(newUserRes);
         })
         .catch(error => {
           res.send(error);

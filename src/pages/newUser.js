@@ -16,6 +16,7 @@ const nameValidation = (name)=>{
 
 // function to capture all inputs and package it up to send to db
 const newUserPayload = () =>{
+    console.log('clicked')
     let userPayload = {};
     let newName = document.getElementsByName('name')[0].value;
     let newEmail = document.getElementsByName('email')[0].value;
@@ -33,10 +34,14 @@ const newUserPayload = () =>{
                userPayload
             })
                   .then(function(response){
-                  console.log(response)
-                  if(response.data.redirect === '/calendar'){
-                    window.location = "/calendar"
+                  console.log("response", response.data.response.user_id)
+                  let user = response.data.response.user_id
+                  localStorage.setItem("uid", user)
+                  console.log(response.data.redir.redirect)
+                  if (response.data.redir.redirect === "/calendar") {
+                    window.location = "/calendar";
                   }
+                  
                 })
                 .catch(function(error){
                   console.log(error)
