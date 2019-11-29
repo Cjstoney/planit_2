@@ -44,7 +44,7 @@ module.exports = function(app) {
             { month: { [Op.eq]: bmonth } },
             { year: { [Op.eq]: year } },
             {
-              [Op.or]: [{ user: null }, { user: { [Op.eq]: user } }]
+              [Op.or]: [{ user: 0 }, { user: { [Op.eq]: user } }]
             }
           ]
         }
@@ -79,12 +79,12 @@ module.exports = function(app) {
             { year: { [Op.eq]: year } },
             { day: { [Op.eq]: day } },
             {
-              [Op.or]: [{ user: null }, { user: { [Op.eq]: user } }]
+              [Op.or]: [{ user: 0 }, { user: { [Op.eq]: user } }]
             }
           ]
         }
       }).then(month => {
-        // console.log(month);
+        console.log(month);
         res.json(month);
       });
     }
