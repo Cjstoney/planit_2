@@ -2,8 +2,8 @@ var helpers = require("./helperFunction");
 var Sequelize = require("sequelize");
 const Op = require("Sequelize").Op;
 
-// const bcrypt = require("bcrypt");
-// const saltRounds = 10;
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 var db = require("../models");
 
 module.exports = function(app) {
@@ -90,6 +90,7 @@ module.exports = function(app) {
     }
   });
 
+  //  ====== Adding an event to the db.
   app.post("/api/addevent", (req, res) => {
     const eventName = req.body.payload.event;
     const eventDesc = req.body.payload.description;
@@ -108,7 +109,7 @@ module.exports = function(app) {
       res.status(400).json(errors);
     } else {
       db.Events.create({
-        Event_id : null,
+        Event_id: null,
         name: eventName,
         description: eventDesc,
         day: eventDay,
@@ -150,22 +151,24 @@ module.exports = function(app) {
       console.log(errors);
       return res.status(400).json(errors);
     } else {
-      db.Users.create({
-        name: name,
-        email: email,
-        password: password
-      })
-        .then(user => {
-          console.log(user.dataValues, "user added");
-          let newUserRes = {}
-         newUserRes.response= user.dataValues
-        //  console.log(response)
-          newUserRes.redir = { redirect: "/calendar" };
-          res.status(201).json(newUserRes);
+      bcrypt.hash(password, saltRounds, function(err, hash) {
+        db.Users.create({
+          name: name,
+          email: email,
+          password: hash
         })
-        .catch(error => {
-          res.send(error);
-        });
+          .then(user => {
+            console.log(user.dataValues, "user added");
+            let newUserRes = {};
+            newUserRes.response = user.dataValues;
+            //  console.log(response)
+            newUserRes.redir = { redirect: "/calendar" };
+            res.status(201).json(newUserRes);
+          })
+          .catch(error => {
+            res.send(error);
+          });
+      });
     }
   });
 
