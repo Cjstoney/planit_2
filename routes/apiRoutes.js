@@ -189,20 +189,28 @@ module.exports = function(app) {
     } else {
       db.Users.findAll({
         where: {
-          email: loginEmail,
-          password: loginPassword
+          email: loginEmail
         }
       })
         .then(user => {
-          let resData = {};
-          resData.response = user[0].dataValues;
-          resData.redir = { redirect: "/calendar" };
+          // console.log(user);
           if (user.length === 0) {
             res.status(400).json("email or password is incorrect");
           } else {
+            let resData = {};
+            resData.response = user[0].dataValues;
+            console.log(resData.response)
+            resData.redir = { redirect: "/calendar" };
             // create and send back a token for the user?
             // redirect to the calendar page for specific user
-            res.status(201).json(resData);
+            bcrypt.compare(loginPassword, resData.response.password, function(err, result) {
+              // Something is wrong with the password comparison here. getting an "incorrect password" on the front end
+              if (result === true) {
+                res.status(201).json(resData);
+              } else {
+                res.send("incorrect password");
+              }
+            });
           }
         })
         .catch(errors => {
