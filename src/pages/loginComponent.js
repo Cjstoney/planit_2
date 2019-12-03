@@ -19,10 +19,6 @@ const loginPayload = () => {
       email: loginEmail,
       password: loginPassword
     };
-    console.log(
-      "loginUserPayload to be sent to the backend ",
-      loginUserPayload
-    );
 
     axios
       .post("http://localhost:3001/api/login", {
@@ -30,9 +26,9 @@ const loginPayload = () => {
       })
       .then(function(response) {
         let user = response.data.response.user_id.toString();
-          console.log(response);
+          // console.log(response);
         localStorage.setItem("uid", user);
-        console.log(response.data.redir);
+        // console.log(response.data.redir);
         if (response.data.redir.redirect === "/calendar") {
           window.location = "/calendar";
         }

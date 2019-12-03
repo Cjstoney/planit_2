@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import "./newUser.css"
 
 // more detailed validation on the backend
 const emailValidation=(email)=>{
@@ -67,11 +68,11 @@ const newUserPayload = () =>{
 class Signup extends React.Component {
     render() {
         return(
-        <div className='signUpPage'>
+        <div id='signUpPage'>
 
             {/* render the logo (component) */}
 
-            <Form>
+            <Form className='signup-form'>
                 {/* render the name input box */}
                 <Form.Group controlId="formName">
                     <Form.Label>Name</Form.Label>
@@ -94,8 +95,8 @@ class Signup extends React.Component {
             </Form>
 
             {/* button component with props passed in for each button */}
-            <Button variant="outline-success" className="createNewUser" onClick={newUserPayload}>Create User</Button>
-            <Link to="/loginComponent"> Already a member</Link>
+            <Button variant="outline-success" className="newUser-button" id="createNewUser" onClick={newUserPayload}>Create User</Button>
+            <Link to="/loginComponent" id='link-button' className="newUser-button"> Already a member</Link>
 
         </div>
         )
