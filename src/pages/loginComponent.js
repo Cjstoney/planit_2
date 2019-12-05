@@ -2,7 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
-
+import './loginComponent.css'
 // simple test for email format. Stricter validation to be done on the backend.
 const emailValidation = email => {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -52,8 +52,7 @@ class LoginComponent extends React.Component {
   render() {
     return (
       <div className="signUpPage">
-        {/* render the logo (component) */}
-
+        <h3 id='login-title'>Welcome Back</h3>
         <Form>
           {/* render the username */}
           <Form.Group controlId="formUserName">

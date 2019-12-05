@@ -96,8 +96,9 @@ class Signup extends React.Component {
 
             {/* button component with props passed in for each button */}
             <Button variant="outline-success" className="newUser-button" id="createNewUser" onClick={newUserPayload}>Create User</Button>
+            <button  className="newUser-button">
             <Link to="/loginComponent" id='link-button' className="newUser-button"> Already a member</Link>
-
+            </button>
         </div>
         )
     }

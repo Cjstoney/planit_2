@@ -1,0 +1,22 @@
+.header-container{
+    background:#4f5d75;
+}
+
+.logout-button{
+    text-decoration: none;
+    background:#f6ae2d;
+    color:#212d40;
+    font-size: 15px;
+    padding:5px;
+    margin:25px 20px;
+    border-style:none;
+    border-radius: 2px;
+    text-align: center;
+    float:right;
+}
+
+.app-title{
+    margin-left: 15px;
+    display:inline-block;
+    color: #bfc0c0;
+}
