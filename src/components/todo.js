@@ -51,9 +51,11 @@ class ToDo extends React.Component {
           return (
             <li className="returnedEvents" key={e.Event_id} id={e.Event_id}>
               {e.name}
+              <div>
               <div className="itemDate">{e.month}</div>
               <div className="itemDate">{e.day}</div>
               <div className="itemDate">{e.year}</div>
+              </div>
               <div className="itemDescription">{e.description}</div>
             </li>
           );
