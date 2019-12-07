@@ -3,6 +3,7 @@ import Calendar from "react-calendar";
 import ToDo from "../components/todo";
 import DailyTodo from "../components/dailyTodo";
 import AddEvent from "../components/AddEvent";
+import './Calendar.css'
 // import axios from "axios";
 
 class CalendarComp extends React.Component {

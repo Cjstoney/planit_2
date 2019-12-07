@@ -1,0 +1,22 @@
+.dailyitemTodo{
+    color:#212d40; 
+}
+
+.monthly-todo-title{
+    font-size: 25px;
+    text-decoration-line: underline;
+
+}
+
+.monthly-todo-container{
+    display:block;
+    /* box-sizing:border-box; */
+    margin:auto;
+    width:60%;
+    text-align: center;
+}
+
+.itemDate{
+    margin:0 2px;
+    display:inline-block;
+}

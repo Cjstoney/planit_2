@@ -1,0 +1,11 @@
+.add-event-container{
+        display:block;
+        /* box-sizing:border-box; */
+        margin:auto;
+        width:60%;
+        text-align: center;   
+}
+.add-event-header{    
+    font-size: 25px;
+    text-decoration-line: underline;
+}
