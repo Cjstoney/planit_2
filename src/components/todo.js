@@ -69,7 +69,7 @@ class ToDo extends React.Component {
       <div className='monthly-todo-container'>
         <h3 className="monthly-todo-title">Events this month:</h3>
         <div>{postItem}</div>
-        
+        <hr className='page-break'></hr>
       </div>
     );
   }

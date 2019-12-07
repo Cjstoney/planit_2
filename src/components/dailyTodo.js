@@ -68,7 +68,7 @@ class DailyTodo extends React.Component{
             <div className='daily-todo-container'>
             <h3 className='dailyitemTodo' id="todo-title">Stuff to do today</h3>
             <div className='dailyitemtodo-container'>{dailyitemTodo}</div>
-            
+            <hr className="page-break"></hr>
           </div>
         )
     }
