@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import './dailyTodo.css'
 
 class DailyTodo extends React.Component{
     constructor(){
@@ -53,20 +54,20 @@ class DailyTodo extends React.Component{
               {
                 this.state.dailyItems.map(function(e, idx, arr){
                   return(
-                    <li className='returnedEvents' key={e.Event_id} id={e.Event_id}>
+                    <li className= 'dailyitemTodo' id='returnedEvents' key={e.Event_id} id={e.Event_id}>
                       {e.name}
-                      <div className='itemDescription'>{e.description}</div>
+                      <div className='dailyitemTodo' id='itemDescription'>{e.description}</div>
                       
                       </li>
                   )
                 }
                 )}
             </ul>
-          ):(<h1>Nothing to See here</h1>)
+          ):(<h3 className= 'dailyitemTodo'id='nothing-to-do-text'>Nothing Planned Yet</h3>)
         return(
-            <div>
-            <h3 className="todo-title">Stuff to do today</h3>
-            <div className='daily-Todo-container'>{dailyitemTodo}</div>
+            <div className='daily-todo-container'>
+            <h3 className='dailyitemTodo' id="todo-title">Stuff to do today</h3>
+            <div className='dailyitemtodo-container'>{dailyitemTodo}</div>
             
           </div>
         )
