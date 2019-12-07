@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import './todo.css'
 
 class ToDo extends React.Component {
   constructor(props) {
@@ -59,16 +60,12 @@ class ToDo extends React.Component {
         })}
       </ul>
     ) : (
-      <h1>Nothing to See here</h1>
+      <h3>Nothing Planned This Month</h3>
     );
     return (
-      // create a div that will have the title of "todo"
-      // needs to have a add new todo button on the bottom of the container
-      // send a get request with the date to the todo table
-      // if there is something to do, render it as a list item.
       // list item needs to have a button for complete and trash
-      <div>
-        <h3 className="todo-title">Events this month</h3>
+      <div className='monthly-todo-container'>
+        <h3 className="monthly-todo-title">Events this month:</h3>
         <div>{postItem}</div>
         
       </div>
