@@ -54,7 +54,7 @@ class DailyTodo extends React.Component{
               {
                 this.state.dailyItems.map(function(e, idx, arr){
                   return(
-                    <li className= 'dailyitemTodo' id='returnedEvents' key={e.Event_id} id={e.Event_id}>
+                    <li className= 'dailyitemTodo' id={'returnedEvents'+e.Event_id} key={e.Event_id} >
                       {e.name}
                       <div className='dailyitemTodo' id='itemDescription'>{e.description}</div>
                       
