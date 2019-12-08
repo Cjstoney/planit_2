@@ -48,6 +48,7 @@ class AddEvent extends React.Component {
     return (
       <div className="add-event-container">
           <h3 className='add-event-header'>Add New Event</h3>
+          <h4 className='info-text'>Click on the date of the event on the calendar. Then add the name and a short description if you choose to.</h4>
         <Form>
           {/* render the event name */}
           <Form.Group controlId="formEventName">
